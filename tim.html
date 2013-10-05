@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html> 
+<head>
+  <base href="http://www.devant.com.mx/tim" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="Devant, Joomla" />
+  <meta name="title" content="TIM" />
+  <meta name="author" content="Administrator" />
+  <meta name="description" content="Sitio web de Devant hecho con Joomla" />
+  <meta name="generator" content="Joomla! 1.5 - Open Source Content Management" />
+  <title>TIM</title>
+  <link href="/templates/devant/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <script type="text/javascript" src="/media/system/js/mootools.js"></script>
+  <script type="text/javascript" src="/media/system/js/caption.js"></script>
+
+<link rel="stylesheet" href="/templates/devant/css/main.css">
+<link rel="stylesheet" href="/templates/devant/js/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" href="/templates/devant/js/jquery.alerts.css">
+<link type="text/css" rel="stylesheet" href="/templates/devant/galleria/themes/classic/galleria.classic.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/templates/devant/js/jquery.cycle.all.js"></script>
+<script type="text/javascript" src="/templates/devant/js/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="/templates/devant/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/templates/devant/js/jquery.alerts.js"></script>
+<script type="text/javascript" src="/templates/devant/galleria/galleria-1.2.8.min.js"></script>
+<script type="text/javascript" src="/templates/devant/galleria/themes/classic/galleria.classic.min.js"> </script>
+<script type="text/javascript">
+jQuery.preloadImages = function(){ for(var i = 0; i<arguments.length; i++){ jQuery("<img>").attr("src", arguments[i]); }}
+	$(document).ready(function(){
+		$('#labelenviar').click(function(){
+			$("#form").trigger("submit")
+		});
+		$(" #menuprensa li").hover(function(){
+		  	$(this).find('ul:first:hidden').css({visibility: "visible",display: "none"}).fadeIn(400);
+		},function(){
+		    $(this).find('ul:first').hide();
+		});
+		$('#formulario form').validate({
+			rules:{
+				nombre : 'required',
+				email :{
+					required : true,
+					email : true	
+				},
+				tema :  'required',
+				mensaje : 'required'
+			},
+			messages:{
+				nombre : '*',
+				email :{
+					required : '*',
+					email : '@'	
+				},
+				tema :  '*',
+				mensaje : '*'
+			},
+			submitHandler: function(form) {
+			  $.ajax({
+		            type:"POST",
+		            url:"/contacto.php",
+		            data:$('#formulario form').serialize(),
+		            success:function(response){
+		                jAlert('¡Gracias! Nos contactaremos contigo próximamente', 'Recibimos correctamente tu mensaje');
+						$('#nombre, #email, #tema ,#mensaje').val("");
+		            }
+		 
+		          })
+		          return false;
+			 }
+		});
+	$.preloadImages("/templates/devant/img/mundo.png","/templates/devant/img/mundomx.png","/templates/devant/img/mundoeu.png","/templates/devant/img/mundoar.png","/templates/devant/img/mundochi.png","/templates/devant/img/mundocol.png","/templates/devant/img/mundoecu.png","/templates/devant/img/mundoperu.png","/templates/devant/img/mundoesp.png","/templates/devant/img/banderaeu.png","/templates/devant/img/banderamx.png","/templates/devant/img/badera.png");
+	$('#hovereu').mouseover(function(){
+		$('#contenedormundos').removeClass();
+		$('#contenedormundos').addClass('backeu');
+		$('.bandera').hide();
+		$('#eu').fadeIn("fast");
+		
+	});
+        $('#hovermex').mouseover(function(){
+		$('#contenedormundos').removeClass();
+		$('#contenedormundos').addClass('backmx');
+		$('.bandera').hide();
+		$('#mx').fadeIn("fast");
+	});
+        $('#hoverarg').mouseover(function(){
+		$('#contenedormundos').removeClass();
+		$('#contenedormundos').addClass('backarg');
+		$('.bandera').hide();
+		$('#arg').fadeIn("fast");
+	});
+	$('#hoverchi').mouseover(function(){
+		$('#contenedormundos').removeClass();
+		$('#contenedormundos').addClass('backchi');
+		$('.bandera').hide();
+		$('#chi').fadeIn("fast");
+	});
+	$('#hovercol').mouseover(function(){
+		$('#contenedormundos').removeClass();
+		$('#contenedormundos').addClass('backcol');
+		$('.bandera').hide();
+		$('#col').fadeIn("fast");
+	});
+	$('#hoverecu').mouseover(function(){
+		$('#contenedormundos').removeClass();
+		$('#contenedormundos').addClass('backecu');
+		$('.bandera').hide();
+		$('#ecu').fadeIn("fast");
+	});
+	$('#hoverperu').mouseover(function(){
+		$('#contenedormundos').removeClass();
+		$('#contenedormundos').addClass('backperu');
+		$('.bandera').hide();
+		$('#peru').fadeIn("fast");
+	});
+	$('#hoveresp').mouseover(function(){
+		$('#contenedormundos').removeClass();
+		$('#contenedormundos').addClass('backesp');
+		$('.bandera').hide();
+		$('#esp').fadeIn("fast");
+	});
+
+		function moveFloatMenu() {
+			var menuOffset = menuYloc.top + $(this).scrollTop() + "px";
+			$('#social').animate({top:menuOffset},{duration:500,queue:false});
+		}
+		menuYloc = $('#social').offset();
+		$(window).scroll(moveFloatMenu);
+		moveFloatMenu();
+		$('#contcarrusel').cycle({
+			fx : 'scrollHorz',
+			next : '#carruselnext',
+			prev : '#carruselprev',
+			rev: 1	
+		});
+		$(" #menusecundario li").hover(function(){
+		  	$(this).find('ul:first:hidden').css({visibility: "visible",display: "none"}).fadeIn(400);
+		},function(){
+		    $(this).find('ul:first').hide();
+		});
+		$('.masinfo').fancybox({
+			padding:5,
+			type:'iframe',
+			width : 452
+		});
+		$('.masinfoingles').fancybox({
+			padding:5,
+			type:'iframe',
+			width : 452
+		});
+		$('#menuempresa').css("height",$('#contenido').height());
+		var categoria = $('#categoria').html();
+		$("ul#menusecundario li:nth-child("+categoria+")").addClass("current");
+		
+	});
+</script>
+<style>
+	#galleria{ width: 700px; height: 400px; background: #000 }
+</style>
+</head>
+
+<body>
+	<div id="header">
+    	<div id="contheader">
+    		<a href="/"><img src="/templates/devant/img/logo.png" alt=""></a>
+            <div id="slogan">
+                <p class="bebas f37 azul"></p>
+                <p class="relay f37 gris">Successful Projects</p>
+            </div>
+    	</div>
+    </div>
+	<div id="wrap">
+    	<div id="social">
+        	<ul>
+        		<li><a href="https://www.facebook.com/pages/Devant-It/420638201339228" target="_blank"><img src="/templates/devant/img/fb.jpg" alt="Facebook"></a></li>
+        		<li><a href="https://twitter.com/DevantIT" target="_blank"><img src="/templates/devant/img/tw.jpg" alt="Twitter"></a></li>
+        		<li><a href="#"><img src="/templates/devant/img/yb.jpg" alt="Youtube"></a></li><!--https://www.youtube.com/user/DevantTI-->
+        		<li><a href="http://www.linkedin.com/company/devant-it?goback=.bzo_*1_*1_*1_*1_*1_%2Fdevant*5it&trk=top_nav_home" target="_blank"><img src="/templates/devant/img/in.jpg" alt="Linkedin"></a></li>
+        	</ul>
+        </div>
+    	<div id="menu1">
+			
+			<form action="index.php" method="post">
+	<div class="search">
+		<input name="searchword" id="mod_search_searchword" maxlength="20" alt="Buscar" class="inputbox" type="text" size="20" value="buscar..."  onblur="if(this.value=='') this.value='buscar...';" onfocus="if(this.value=='buscar...') this.value='';" />	</div>
+	<input type="hidden" name="task"   value="search" />
+	<input type="hidden" name="option" value="com_search" />
+	<input type="hidden" name="Itemid" value="11" />
+</form><ul class="menu"><li class="item1"><a href="http://www.devant.com.mx/"><span>Inicio</span></a></li><li class="item2"><a href="/trabaja-con-nosotros"><span>Colabora con Nosotros</span></a></li><li class="item3"><a href="/contacto"><span>Contacto</span></a></li><li class="item4"><a href="/log-in"><span>Log In</span></a></li></ul>
+            <img src="/templates/devant/img/lupa.jpg" alt="lupa" id="lupa">
+        </div>
+        <div id="menu2">
+			<div id="contmenu2">
+			<ul id="menusecundario"><li>
+			<h3 class="bold gris2">Nuestra Empresa</h3><ul class="menu"><li class="item8"><a href="/mision-vision-valores"><span>Misión / Visión / Valores</span></a></li><li class="item9"><a href="/certificaciones"><span>Certificaciones</span></a></li><li class="item10"><a href="/historia"><span>Historia</span></a></li><li id="current" class="active item11"><a href="/tim"><span>TIM</span></a></li></ul>
+			</li>
+			<li>
+			<h3 class="bold gris2">Productos</h3><ul class="menu"><li class="item12"><a href="/syncsort-dme-mfx"><span>Syncsort DMExpress</span></a></li><li class="item24"><a href="/syncsort-mfx"><span>Syncsort MFX</span></a></li><li class="item14"><a href="/ibm-blueworks-lombardi"><span>IBM BlueWorks Live</span></a></li><li class="item21"><a href="/ibm-bmp-75"><span>IBM BPM 7.5</span></a></li></ul>
+			</li>
+			<li>
+			<h3 class="bold gris2">Servicios</h3><ul class="menu"><li class="item17"><a href="/fabrica-de-analisis-y-diseno"><span>Fábrica de Análisis y Diseño</span></a></li><li class="item15"><a href="/fabrica-de-software"><span>Fábrica de Software</span></a></li><li class="item16"><a href="/fabrica-de-pruebas"><span>Fábrica de Pruebas</span></a></li></ul>
+			</li>
+            </ul>
+			</div>
+            <ul id="menuprensa">
+            	<li>
+            	<h3 class="bold gris2">Sala de Prensa</h3><ul class="menu"><li class="item18"><a href="/noticias"><span>Noticias</span></a></li><li class="item19"><a href="/casos-de-exito"><span>Casos de Éxito</span></a></li><li class="item20"><a href="/galeria"><span>Galería</span></a></li></ul>
+                </li>
+            </ul>
+		</div>
+        <div id="contenido">
+        	<span id='categoria'>1</span>									<div id="menuempresa">
+						<ul class="menu"><li class="item8"><a href="/mision-vision-valores"><span>Misión / Visión / Valores</span></a></li><li class="item9"><a href="/certificaciones"><span>Certificaciones</span></a></li><li class="item10"><a href="/historia"><span>Historia</span></a></li><li id="current" class="active item11"><a href="/tim"><span>TIM</span></a></li></ul>
+						</div>
+						<div id="contenidoempresa"><p><img src="/images/imagenes/logo_tim.jpg" border="0" width="500" /></p>
+<p> </p>
+<table border="0" width="550">
+<tbody>
+<tr>
+<td width="260">
+<p>TIM (Team Information Managment) es una herramienta desarrollada por Devant IT y se basa en la integración de expertos técnicos con las mejores prácticas en el desarrollo de proyectos. El TIM gestiona de manera transparente los factores que determinan el éxito de un proyecto, el "Time to Market“(Tiempo, Costo y Calidad).</p>
+</td>
+<td width="30"></td>
+<td>
+<p>Permite la integración del equipo de trabajo y el fácil acceso de todos los participantes a cualquier nivel del proyecto, con la finalidad de visualizar el estado de una actividad o la entrega de la misma.</p>
+<p> </p>
+<p> </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p> </p>
+<p><img src="/templates/devant/img/ESQUEMA.jpg" border="0" /></p>
+<div id="compromisostim">
+<h3>CARACTERÍSTICAS</h3>
+<p> </p>
+<ul style="list-style-type: disc;">
+<span style="font-size: 13pt">
+<li>Visualización del status del proyecto en tiempo real.</li>
+<p> </p>
+<li>Metodología adaptable a cualquier tipo de proyecto.</li>
+<p> </p>
+<li>Visualización de las dependencias entre actividades y su criticidad.</li>
+<p> </p>
+<li>Generación de graficas de desempeño por cada actor del proyecto.</li>
+<p> </p>
+<li>Acceso a la información en cualquier lugar y con cualquier dispositivo con conectividad web.</li>
+</span> 
+</ul>
+</div>
+<p> </p>
+<p> </p>
+
+</div>
+						<div class="clear"></div>
+					            
+			
+        </div>
+        <div id="footer">
+        	<div class="menufooter primero">
+				<h3 class="bold gris2">Nuestra Empresa</h3><ul class="menu"><li class="item8"><a href="/mision-vision-valores"><span>Misión / Visión / Valores</span></a></li><li class="item9"><a href="/certificaciones"><span>Certificaciones</span></a></li><li class="item10"><a href="/historia"><span>Historia</span></a></li><li id="current" class="active item11"><a href="/tim"><span>TIM</span></a></li></ul>
+            </div>
+            <div class="divisor"></div>
+            <div class="menufooter">
+				<h3 class="bold gris2">Productos</h3><ul class="menu"><li class="item12"><a href="/syncsort-dme-mfx"><span>Syncsort DMExpress</span></a></li><li class="item24"><a href="/syncsort-mfx"><span>Syncsort MFX</span></a></li><li class="item14"><a href="/ibm-blueworks-lombardi"><span>IBM BlueWorks Live</span></a></li><li class="item21"><a href="/ibm-bmp-75"><span>IBM BPM 7.5</span></a></li></ul>
+            </div>
+            <div class="divisor"></div>
+            <div class="menufooter">
+				<h3 class="bold gris2">Servicios</h3><ul class="menu"><li class="item17"><a href="/fabrica-de-analisis-y-diseno"><span>Fábrica de Análisis y Diseño</span></a></li><li class="item15"><a href="/fabrica-de-software"><span>Fábrica de Software</span></a></li><li class="item16"><a href="/fabrica-de-pruebas"><span>Fábrica de Pruebas</span></a></li></ul>
+            </div>
+            <div class="divisor"></div>
+            <div class="menufooter">
+				<h3 class="bold gris2">Sala de Prensa</h3><ul class="menu"><li class="item18"><a href="/noticias"><span>Noticias</span></a></li><li class="item19"><a href="/casos-de-exito"><span>Casos de Éxito</span></a></li><li class="item20"><a href="/galeria"><span>Galería</span></a></li></ul>
+            </div>
+            <div id="plecafooter">
+				<ul class="menu"><li class="item7"><a href="/partners"><span>Partners</span></a></li><li class="item5"><a href="/responsabilidad-social"><span>Responsabilidad Social</span></a></li><li class="item6"><a href="/presencia"><span>Presencia</span></a></li><li class="item27"><a href="/ley-de-proteccion-de-datos"><span>Ley de Protección de Datos</span></a></li></ul>
+			</div>
+        </div>
+    </div>
+</body>
+</html>
